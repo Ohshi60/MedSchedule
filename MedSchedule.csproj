@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Day.cs" />
     <Compile Include="EveningShift.cs" />
     <Compile Include="DayShift.cs" />
+    <Compile Include="Freeshift.cs" />
     <Compile Include="NightShift.cs" />
     <Compile Include="Nurse.cs" />
     <Compile Include="Person.cs" />

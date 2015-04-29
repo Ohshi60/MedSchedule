@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace MedSchedule
 {
-    class DayShift: Shift 
+    class FreeShift : Shift
     {
-        
-        public DayShift() : base()
+        public FreeShift() : base()
         {
-            
         }
-        public DayShift(DateTime date) : base(date)
+        public FreeShift(DateTime time) : base(time)
         {
             this.nursesPerShift = 1;
         }

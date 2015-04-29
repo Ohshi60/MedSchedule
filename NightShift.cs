@@ -13,7 +13,7 @@ namespace MedSchedule
         }
         public NightShift(DateTime date) : base(date)
         {
-            this.nursesPerShift = 4;
+            this.nursesPerShift = 2;
 
         }
     }

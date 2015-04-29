@@ -24,18 +24,21 @@ namespace MedSchedule
             nurses.Add(n5);
                   List<Nurse> nurses2 = new List<Nurse>();
             nurses2.Add(n1);
-            nurses2.Add(n2);
-            nurses2.Add(n3);
-            nurses2.Add(n4);
-            nurses2.Add(n5);
-            Plan p1 = new Plan(2);
-         //   Plan p2 = new Plan(6);
-            p1.Add3(nurses);
-            p1.PrintPlan();
-            p1.PrintNurseOverview();
+         //   nurses2.Add(n2);
+         //   nurses2.Add(n3);
+         //   nurses2.Add(n4);
+         //   nurses2.Add(n5);
+         //   Plan p1 = new Plan(2);
+         ////   Plan p2 = new Plan(6);
+         //   p1.Add3(nurses);
+         //   p1.PrintPlan();
+         //   p1.PrintNurseOverview();
           //  p2.Add2(nurses);
             //p2.PrintPlan();
             //p2.PrintNurseOverview(nurses);
+            Plan p2 = new Plan(5);
+            p2.Initialize(nurses);
+            p2.printPlan();
             Console.ReadKey();
             
         }
