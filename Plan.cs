@@ -65,9 +65,8 @@ namespace MedSchedule
                         }
                         else
                             j++;
+                    }
                 }
-            }
-                
             }
 
         }
@@ -83,13 +82,45 @@ namespace MedSchedule
                 Console.WriteLine("Shift active roster: {0}/ {1}" , shift.getNurses().Count(), shift.fullShift());
             }
         }
-        public void PrintNurseOverview(List<Nurse> nurses)
+        public void PrintNurseOverview()
         {
-            foreach(Nurse nurse in nurses)
+            foreach(Shift shift in shifts)
             {
-                nurse.NurseDetails();
+                shift.printNursesOnShift();
             }
         }
-
+        public void Add3(List<Nurse> nurses)
+        {
+            int i;
+            int j = 1;
+            int k;
+            List<Nurse> possibleCandidates = new List<Nurse>(nurses);
+            for(i = 0; i < shifts.Count();i++,j++)
+            {
+                if(j % 3 == 0 )
+                {
+                    possibleCandidates = new List<Nurse>(nurses);
+                }
+                if(shifts[i].getNurses().Count() < shifts[i].fullShift())
+                {
+                    for (k = 0; k < possibleCandidates.Count(); k++)
+                    {
+                        if (shifts[i].getNurses().Contains(possibleCandidates[k]) != true)
+                        {
+                            shifts[i].Add(possibleCandidates[k]);
+                            possibleCandidates.Remove(possibleCandidates[k]);
+                        }
+                    }
+                }
+            }
+        }
+        //public bool nursePreviousShift(Nurse nurse)
+        //{
+        //    int i, k;
+        //    for(int k = 1; i < shifts.Count();i++)
+        //    {
+        //        shifts[k].getNurses().Contains(nurse); 
+        //    }
+        //}
     }
 }

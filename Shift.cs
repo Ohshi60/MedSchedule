@@ -24,6 +24,11 @@ namespace MedSchedule
         public void Add(Nurse nurse)
         {
             assignedNurses.Add(nurse);
+            nurse.incrementShift();
+        }
+        public void Remove(Nurse nurse)
+        {
+            assignedNurses.Remove(nurse);
         }
         public void PrintShift()
         {
