@@ -26,19 +26,34 @@ namespace MedSchedule
 
             foreach (Day day in days)
             {
+                List<Nurse> possibleCandidates = new List<Nurse>(nurses);
                 foreach (Shift shift in day.dailyShifts())
                 {
-                    foreach (Nurse nurse in nurses)
+                    while(shift.getNurses().Count() < shift.fullShift())
+                    { 
+                    Nurse n = possibleCandidates[r.Next(0, possibleCandidates.Count())];
+
+                    if (shift.getNurses().Contains(n) != true && shift.getNurses().Count() < shift.fullShift())
                     {
-                        if (shift.getNurses().Contains(nurse) && shift.getNurses().Count() >= shift.fullShift())
-                        {
-                            break;
-                        }
-                        else if (shift.getNurses().Contains(nurse) != true && shift.getNurses().Count() < shift.fullShift())
-                            shift.Add(nurse);
-                        else
-                            break;
+                        shift.Add(n);
+                        possibleCandidates.Remove(n);
                     }
+                    else
+                        break;
+                    }
+
+
+                    //foreach (Nurse nurse in nurses)
+                    //{
+                    //    if (shift.getNurses().Contains(nurse) && shift.getNurses().Count() >= shift.fullShift())
+                    //    {
+                    //        break;
+                    //    }
+                    //    else if (shift.getNurses().Contains(nurse) != true && shift.getNurses().Count() < shift.fullShift())
+                    //        shift.Add(nurse);
+                    //    else
+                    //        break;
+                    //}
                 }
             }
         }

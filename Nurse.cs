@@ -9,6 +9,7 @@ namespace MedSchedule
     public class Nurse : Person
     {
         private int workCounter = 0;
+        private bool hadNightshift = false;
         //private List<Shift> asssignedShifts;
         public Nurse(string name, long cpr, int phoneNumber, Sex sex, int age) : base(name, cpr, phoneNumber, sex, age)
         {
@@ -26,5 +27,6 @@ namespace MedSchedule
         {
             Console.WriteLine("Nurse: {0} #ofShifts: {1}", this.name, this.workCounter);
         }
+        
     }
 }
