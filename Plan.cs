@@ -41,6 +41,14 @@ namespace MedSchedule
                     else
                         break;
                     }
+                    if (possibleCandidates.Count() != 0)
+                    {
+                        if (shift is FreeShift)
+                            foreach(Nurse nurse in possibleCandidates)
+                            {
+                                shift.Add(nurse);
+                            }
+                    }
 
 
                     //foreach (Nurse nurse in nurses)
