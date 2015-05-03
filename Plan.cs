@@ -23,45 +23,74 @@ namespace MedSchedule
         {
             // Part 1 of the method
             Random r = new Random();
-
-            foreach (Day day in days)
+            for(int i = 0;i<days.Count();i++)
             {
                 List<Nurse> possibleCandidates = new List<Nurse>(nurses);
-                foreach (Shift shift in day.dailyShifts())
+                if(i == 0)
                 {
-                    while(shift.getNurses().Count() < shift.fullShift())
-                    { 
-                    Nurse n = possibleCandidates[r.Next(0, possibleCandidates.Count())];
+                    foreach(Shift shift in days[i].dailyShifts())
+                    {
+                        while (shift.fullShift() != true)
+                        {
+                            Nurse n = possibleCandidates[r.Next(0, possibleCandidates.Count())];
 
-                    if (shift.getNurses().Contains(n) != true && shift.getNurses().Count() < shift.fullShift())
-                    {
-                        shift.Add(n);
-                        possibleCandidates.Remove(n);
-                    }
-                    else
-                        break;
-                    }
-                    if (possibleCandidates.Count() != 0)
-                    {
-                        if (shift is FreeShift)
-                            foreach(Nurse nurse in possibleCandidates)
+                            if ((shift.getNurses().Contains(n) && shift.fullShift()) != true)
                             {
-                                shift.Add(nurse);
+                                shift.Add(n);
+                                possibleCandidates.Remove(n);
+                            }
+                            else
+                                break;
+                        }
+                        if (possibleCandidates.Count() != 0)
+                        {
+                            if (shift is FreeShift)
+                                foreach (Nurse nurse in possibleCandidates)
+                                {
+                                    shift.Add(nurse);
+                                }
+                        }
+                    }
+                }
+                else
+                {
+                    for(int k= 0; k < days[i].dailyShifts().Count();k++)
+                    {
+                            if (possibleCandidates.Count() == 0)
+                                break;
+
+                            Nurse n2 = possibleCandidates[r.Next(0, possibleCandidates.Count())];
+
+                            if ((days[i - 1].dailyShifts()[2].getNurses().Contains(n2) || days[i - 1].dailyShifts()[1].getNurses().Contains(n2)) != true && days[i].dailyShifts()[0].fullShift() != true)
+                            {
+                                days[i].dailyShifts()[0].Add(n2);
+                                possibleCandidates.Remove(n2);
+                            }
+                            else if (days[i - 1].dailyShifts()[2].getNurses().Contains(n2) != true && days[i].dailyShifts()[1].fullShift() != true)
+                            {
+                                days[i].dailyShifts()[1].Add(n2);
+                                possibleCandidates.Remove(n2);
+                            }
+                            else if(days[i].dailyShifts()[2].fullShift() != true)
+                            {
+                                days[i].dailyShifts()[2].Add(n2);
+                                possibleCandidates.Remove(n2);
+                            }
+                            else if(days[i].dailyShifts()[3].fullShift() != true)
+                            {
+                                days[i].dailyShifts()[3].Add(n2);
+                                possibleCandidates.Remove(n2);
+                            }
+                            if (possibleCandidates.Count() != 0)
+                            {
+                               if(days[i].dailyShifts()[k] is FreeShift)
+                               {
+                                   foreach (Nurse nurse in possibleCandidates)
+                                       days[i].dailyShifts()[k].Add(nurse);
+                               }
                             }
                     }
 
-
-                    //foreach (Nurse nurse in nurses)
-                    //{
-                    //    if (shift.getNurses().Contains(nurse) && shift.getNurses().Count() >= shift.fullShift())
-                    //    {
-                    //        break;
-                    //    }
-                    //    else if (shift.getNurses().Contains(nurse) != true && shift.getNurses().Count() < shift.fullShift())
-                    //        shift.Add(nurse);
-                    //    else
-                    //        break;
-                    //}
                 }
             }
         }
@@ -74,7 +103,53 @@ namespace MedSchedule
                 {
                     shift.PrintShift();
                 }
-                      
+               
+            }
+        }
+        public void printNurses(List<Nurse> nurses)
+        {
+            foreach(Nurse nurse in nurses)
+            {
+                nurse.NurseDetails();
+            }
+        }
+        public void resetNurses(List<Nurse> nurses)
+        {
+            foreach(Nurse nurse in nurses)
+            {
+                nurse.resetCounter();
+            }
+        }
+
+        private int nightViolations = 0;
+        private int avrShiftDifference;
+        private int freeShiftViolation = 0;
+
+        public void returnScore()
+        {
+            Console.WriteLine("Fitness of the plan:   Night Shift Violations:  {0}  Free Shift Violations:   {1}", nightViolations, freeShiftViolation);
+        }
+
+        public void evaluate()
+        {
+            for(int i = 0; i < (days.Count() - 1);i++)
+            {
+
+                nightViolations +=  days[i].dailyShifts()[2].getNurses().Count(days[i+1].dailyShifts()[2].getNurses().Contains);
+                List<Nurse> _tempNurses = new List<Nurse>();
+                foreach(Nurse nurse in days[i].dailyShifts()[3].getNurses())
+                {
+                    if(days[i+1].dailyShifts()[3].getNurses().Contains(nurse))
+                    {
+                        _tempNurses.Add(nurse);
+                    }
+                }
+                if(i < (days.Count()-2))
+                {
+                freeShiftViolation += _tempNurses.Count(days[i+2].dailyShifts()[3].getNurses().Contains);
+                }
+
+
             }
         }
     }

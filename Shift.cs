@@ -24,7 +24,11 @@ namespace MedSchedule
         public void Add(Nurse nurse)
         {
             assignedNurses.Add(nurse);
-            nurse.incrementShift();
+            if(!(this is FreeShift))
+            {
+                nurse.incrementShift();    
+            }
+            
         }
         public void Remove(Nurse nurse)
         {
@@ -42,9 +46,9 @@ namespace MedSchedule
         {
             return assignedNurses;
         }
-        public int fullShift()
+        public bool fullShift()
         {
-            return this.nursesPerShift;
+            return (this.nursesPerShift == assignedNurses.Count());
         }
         public void printNursesOnShift()
         {

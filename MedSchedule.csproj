@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Day.cs" />
+    <Compile Include="Evaluator.cs" />
     <Compile Include="EveningShift.cs" />
     <Compile Include="DayShift.cs" />
     <Compile Include="Freeshift.cs" />
