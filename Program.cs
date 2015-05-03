@@ -28,13 +28,15 @@ namespace MedSchedule
             nurses.Add(n6);
             nurses.Add(n7);
             nurses.Add(n8);
-            Evaluator eva = new Evaluator();
-            Plan p2 = new Plan(5);
+            Plan p2 = new Plan();
             p2.Initialize(nurses);
-            p2.printPlan();
-            p2.printNurses(nurses);
-            p2.evaluate();
-            p2.returnScore();
+            //p2.printPlan();
+            //p2.printNurses(nurses);
+            //p2.returnScore();
+            Plan p3 = p2.SuperPlan(nurses, 30);
+            p3.printPlan();
+            p3.printNurses();
+            p3.returnScore();
             Console.ReadKey();
         }
     }

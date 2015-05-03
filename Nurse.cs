@@ -31,6 +31,10 @@ namespace MedSchedule
         {
             this.workCounter = 0;
         }
+        public int nurseWorkCounter()
+        {
+            return this.workCounter;
+        }
         
     }
 }
