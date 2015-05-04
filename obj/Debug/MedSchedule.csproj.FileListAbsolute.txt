@@ -3,3 +3,4 @@ c:\users\yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedul
 c:\users\yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\bin\Debug\MedSchedule.pdb
 c:\users\yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\obj\Debug\MedSchedule.exe
 c:\users\yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\obj\Debug\MedSchedule.pdb
+C:\Users\Yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\obj\Debug\MedSchedule.csprojResolveAssemblyReference.cache

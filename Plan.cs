@@ -9,8 +9,17 @@ namespace MedSchedule
     class Plan
     {
         //private List<Shift> shifts;
-        private List<Nurse> finalNurseSchedule = new List<Nurse>();
+        private List<Nurse> nurseSchedule = new List<Nurse>();
         private List<Day> days;
+        private int nightViolations = 0;
+        private double avrShiftDifference = 0;
+        private int freeShiftViolation = 0;
+        private double fitnessScore = 0;
+
+        public double FitnessScore{ get; set; }
+        public int numberOfDayZ { get { return days.Count(); } }
+
+        public List<Nurse> ListofNurses { get { return nurseSchedule; } set { nurseSchedule = value; } }
         public Plan()
         {
             days= new List<Day>();
@@ -109,23 +118,13 @@ namespace MedSchedule
         }
         public void printNurses()
         {
-            foreach(Nurse nurse in finalNurseSchedule)
+            foreach(Nurse nurse in nurseSchedule)
             {
                 nurse.NurseDetails();
             }
         }
-        public void resetNurses(List<Nurse> nurses)
-        {
-            foreach(Nurse nurse in nurses)
-            {
-                nurse.resetCounter();
-            }
-        }
+        
 
-        private int nightViolations = 0;
-        private double avrShiftDifference =0;
-        private int freeShiftViolation = 0;
-        private double fitnessScore = 0;
 
         public void returnScore()
         {
@@ -170,25 +169,7 @@ namespace MedSchedule
             avrShiftDifference = tempLort / Convert.ToDouble(days.Count());
             fitnessScore = ((Convert.ToDouble(freeShiftViolation) + Convert.ToDouble(nightViolations)) * avrShiftDifference)/Convert.ToDouble(days.Count());
         }
-        public Plan SuperPlan(List<Nurse> nurses, int days)
-        {
-            Plan bestPlan = new Plan();
-            bestPlan.fitnessScore = 30000;
-            for (int i = 0; i < 100; i++ )
-            {
-                this.resetNurses(nurses);
-                Plan p = new Plan(days);
-                p.Initialize(nurses);
-                p.evaluate(nurses);
-                if(p.fitnessScore < bestPlan.fitnessScore)
-                {
-                    bestPlan = p;
-                    bestPlan.finalNurseSchedule = new List<Nurse>(nurses);
-                }
-            }
-            return bestPlan;
-
-        }
+        
     }
 
 }
