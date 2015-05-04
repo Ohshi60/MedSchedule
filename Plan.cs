@@ -9,6 +9,7 @@ namespace MedSchedule
     class Plan
     {
         //private List<Shift> shifts;
+        private List<Nurse> finalNurseSchedule = new List<Nurse>();
         private List<Day> days;
         public Plan()
         {
@@ -106,9 +107,9 @@ namespace MedSchedule
                
             }
         }
-        public void printNurses(List<Nurse> nurses)
+        public void printNurses()
         {
-            foreach(Nurse nurse in nurses)
+            foreach(Nurse nurse in finalNurseSchedule)
             {
                 nurse.NurseDetails();
             }
@@ -122,16 +123,19 @@ namespace MedSchedule
         }
 
         private int nightViolations = 0;
-        private int avrShiftDifference;
+        private double avrShiftDifference =0;
         private int freeShiftViolation = 0;
+        private double fitnessScore = 0;
 
         public void returnScore()
         {
-            Console.WriteLine("Fitness of the plan:   Night Shift Violations:  {0}  Free Shift Violations:   {1}", nightViolations, freeShiftViolation);
+            Console.WriteLine("Fitness of the plan:   Night Shift Violations:  {0}  Free Shift Violations:   {1}   Avr Shifts per day per nurse:  {2}   Fitness score: {3}", nightViolations, freeShiftViolation, avrShiftDifference, fitnessScore);
         }
-
-        public void evaluate()
+        public void evaluate(List<Nurse> nurses)
         {
+            nightViolations = 0;
+            avrShiftDifference = 0;
+            freeShiftViolation = 0;
             for(int i = 0; i < (days.Count() - 1);i++)
             {
 
@@ -148,9 +152,43 @@ namespace MedSchedule
                 {
                 freeShiftViolation += _tempNurses.Count(days[i+2].dailyShifts()[3].getNurses().Contains);
                 }
-
-
             }
+            int nurseMin =100;
+            int nurseMax =0;
+            foreach(Nurse nurse in nurses)
+            {
+                if (nurse.nurseWorkCounter() > nurseMax)
+                {
+                    nurseMax = nurse.nurseWorkCounter();
+                }
+                if (nurse.nurseWorkCounter() < nurseMin)
+                {
+                    nurseMin = nurse.nurseWorkCounter();
+                }
+            }
+            double tempLort = (Convert.ToDouble(nurseMax) - Convert.ToDouble(nurseMin));
+            avrShiftDifference = tempLort / Convert.ToDouble(days.Count());
+            fitnessScore = ((Convert.ToDouble(freeShiftViolation) + Convert.ToDouble(nightViolations)) * avrShiftDifference)/Convert.ToDouble(days.Count());
+        }
+        public Plan SuperPlan(List<Nurse> nurses, int days)
+        {
+            Plan bestPlan = new Plan();
+            bestPlan.fitnessScore = 30000;
+            for (int i = 0; i < 100; i++ )
+            {
+                this.resetNurses(nurses);
+                Plan p = new Plan(days);
+                p.Initialize(nurses);
+                p.evaluate(nurses);
+                if(p.fitnessScore < bestPlan.fitnessScore)
+                {
+                    bestPlan = p;
+                    bestPlan.finalNurseSchedule = new List<Nurse>(nurses);
+                }
+            }
+            return bestPlan;
+
         }
     }
+
 }
