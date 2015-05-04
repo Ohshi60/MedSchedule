@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MedSchedule
 {
-    class EveningShift : Shift 
+    public class EveningShift : Shift 
     {
         public EveningShift() : base()
         {

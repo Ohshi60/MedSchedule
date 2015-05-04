@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MedSchedule
 {
-    class FreeShift : Shift
+    public class FreeShift : Shift
     {
         public FreeShift() : base()
         {

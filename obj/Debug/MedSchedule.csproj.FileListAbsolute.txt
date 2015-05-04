@@ -1,6 +1,5 @@
-c:\users\yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\bin\Debug\MedSchedule.exe.config
-c:\users\yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\bin\Debug\MedSchedule.exe
-c:\users\yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\bin\Debug\MedSchedule.pdb
-c:\users\yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\obj\Debug\MedSchedule.exe
-c:\users\yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\obj\Debug\MedSchedule.pdb
-C:\Users\Yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\obj\Debug\MedSchedule.csprojResolveAssemblyReference.cache
+C:\Users\Yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\bin\Debug\MedSchedule.exe.config
+C:\Users\Yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\bin\Debug\MedSchedule.exe
+C:\Users\Yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\bin\Debug\MedSchedule.pdb
+C:\Users\Yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\obj\Debug\MedSchedule.exe
+C:\Users\Yolomancer\documents\visual studio 2013\Projects\MedSchedule\MedSchedule\obj\Debug\MedSchedule.pdb

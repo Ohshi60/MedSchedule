@@ -18,7 +18,7 @@ namespace MedSchedule
             {
                 this.resetNurses();
                 Plan p = new Plan(days);
-                p.Initialize(nurses);
+                p.Initialize(finalNurses);
                 p.evaluate(finalNurses);
                 if (p.FitnessScore < bestPlan.FitnessScore)
                 {
@@ -35,12 +35,12 @@ namespace MedSchedule
                 nurse.resetCounter();
             }
         }
+
         public void printLortet()
         {
             bestPlan.printPlan();
             bestPlan.returnScore();
             bestPlan.printNurses();
         }
-
     }
 }

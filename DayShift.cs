@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MedSchedule
 {
-    class DayShift: Shift 
+    public class DayShift: Shift 
     {
         
         public DayShift() : base()
